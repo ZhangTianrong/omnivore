@@ -11,7 +11,7 @@ firefox: build
 	echo "building firefox package"
 	FIREFOX_PKG_NAME="firefox-$(shell cat dist/manifest.json| jq -j .version).zip" ; \
 	FIREFOX_SRC_NAME="firefox-$(shell cat dist/manifest.json| jq -j .version)-src.zip" ; \
-	pushd dist; zip -r ../$$FIREFOX_PKG_NAME *; popd; \
+	cd dist; zip -r ../$$FIREFOX_PKG_NAME *; cd ..; \
 	zip -r $$FIREFOX_SRC_NAME src/* yarn.lock package.json .env.production webpack.js replace-with-process-env.js; \
 	echo "done"
 
@@ -22,6 +22,6 @@ chrome: build
 edge: build
 	echo "building edge package"
 	EDGE_PKG_NAME="omnivore-extension-edge-$(shell cat dist/manifest.json| jq -j .version).zip" ; \
-	pushd dist; zip -r $${EDGE_PKG_NAME} ./*; popd;
+	cd dist; zip -r $${EDGE_PKG_NAME} ./*; cd ..;
 
 
